@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 
-import { deleteTask } from "@/composable/deleteTask.ts";
-import { checkLocalStorage } from "@/composable/checkLocalStorage.ts";
+import { deleteTask } from "@/composable/deleteTask";
+import { checkLocalStorage } from "@/composable/checkLocalStorage";
 
 const props = defineProps<{
   doneTask: string;
 }>();
-
-// const emit = defineEmits<{
-//   (e: "replace-task-to-done-tasks", task: string): void;
-// }>();
 
 const doneTasks = ref<string[]>([]);
 
@@ -20,7 +16,7 @@ watch(
   () => props.doneTask,
   () => {
     doneTasks.value.push(props.doneTask);
-    localStorage.setItem("doneTasks", doneTasks.value);
+    localStorage.setItem("doneTasks", JSON.stringify(doneTasks.value));
   }
 );
 

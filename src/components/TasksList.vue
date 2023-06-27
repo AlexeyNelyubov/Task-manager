@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import InputForGetTask from "@/components/InputForGetTask.vue";
-import { deleteTask } from "@/composable/deleteTask.ts";
-import { checkLocalStorage } from "@/composable/checkLocalStorage.ts";
+import { deleteTask } from "@/composable/deleteTask";
+import { checkLocalStorage } from "@/composable/checkLocalStorage";
 
 const props = defineProps<{
   newTask: string;
@@ -23,7 +23,7 @@ watch(
   () => props.newTask,
   () => {
     tasks.value.push(props.newTask);
-    localStorage.setItem("tasksList", tasks.value);
+    localStorage.setItem("tasksList", JSON.stringify(tasks.value));
   }
 );
 
@@ -45,7 +45,7 @@ const getCurrentTask = (currentTask: string): void => {
 
 const changeTask = (newTask: string): void => {
   tasks.value[indexTaskForChange.value] = newTask;
-  localStorage.setItem("tasksList", tasks.value);
+  localStorage.setItem("tasksList", JSON.stringify(tasks.value));
 };
 </script>
 

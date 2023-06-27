@@ -6,7 +6,8 @@ import InputForGetTask from "@/components/InputForGetTask.vue";
 
 const newTask = ref("");
 
-const addNewTask = (task) => {
+const addNewTask = (task: string): void => {
+  console.log(task);
   newTask.value = task;
 };
 </script>
@@ -15,7 +16,7 @@ const addNewTask = (task) => {
   <Transition appear name="tasks">
     <main class="tasks-main">
       <h1 class="tasks-main__title">Определи свои цели!</h1>
-      <InputForGetTask @get-task="addNewTask"></InputForGetTask>
+      <InputForGetTask @add-task="addNewTask"></InputForGetTask>
       <div class="tasks-main__all-tasks">
         <AllTasks :newTask="newTask"></AllTasks>
       </div>
