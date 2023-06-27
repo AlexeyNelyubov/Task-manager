@@ -2,13 +2,12 @@
 import { ref } from "vue";
 
 import AllTasks from "@/components/AllTasks.vue";
+import InputForGetTask from "@/components/InputForGetTask.vue";
 
-const task = ref("");
 const newTask = ref("");
 
-const addNewTask = () => {
-  newTask.value = task.value;
-  task.value = "";
+const addNewTask = (task) => {
+  newTask.value = task;
 };
 </script>
 
@@ -16,12 +15,7 @@ const addNewTask = () => {
   <Transition appear name="tasks">
     <main class="tasks-main">
       <h1 class="tasks-main__title">Определи свои цели!</h1>
-      <input
-        placeholder="Add a new task"
-        v-model="task"
-        class="tasks-main__task-field"
-        @change="addNewTask"
-      />
+      <InputForGetTask @get-task="addNewTask"></InputForGetTask>
       <div class="tasks-main__all-tasks">
         <AllTasks :newTask="newTask"></AllTasks>
       </div>
@@ -39,7 +33,7 @@ const addNewTask = () => {
 }
 
 .tasks-main__title {
-  margin-top: 10vh;
+  margin: 10vh 0 8vh 0;
   font: var(--title-size) var(--text-style);
 }
 
@@ -49,14 +43,6 @@ const addNewTask = () => {
 
 .tasks-enter-from {
   opacity: 0;
-}
-
-.tasks-main__task-field {
-  margin-top: 8vh;
-  padding: 1vh 2vw;
-  font-size: var(--text-size);
-  border: none;
-  outline: none;
 }
 
 .tasks-main__all-tasks {

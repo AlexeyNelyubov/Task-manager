@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
+
 import { deleteTask } from "@/composable/deleteTask.ts";
 import { checkLocalStorage } from "@/composable/checkLocalStorage.ts";
 
