@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
+import { deleteTask } from "@/composable/deleteTask.ts";
+import { checkLocalStorage } from "@/composable/checkLocalStorage.ts";
 
 const props = defineProps<{
   newTask: string;
@@ -11,21 +13,19 @@ const emit = defineEmits<{
 
 const tasks = ref<string[]>([]);
 
+checkLocalStorage("tasksList", tasks.value);
+
 watch(
   () => props.newTask,
   () => {
     tasks.value.push(props.newTask);
-    // localStorage.setItem('tasksList', tasks.value);
+    localStorage.setItem("tasksList", tasks.value);
   }
 );
 
-const deliteTask = (task: string): void => {
-  tasks.value.splice(tasks.value.indexOf(task), 1);
-};
-
 const replaceTaskToDoneTasks = (task: string): void => {
   emit("replace-task-to-done-tasks", task);
-  deliteTask(task);
+  deleteTask(tasks.value, task, "tasksList");
 };
 
 const numberOfTasks = computed(() => {
@@ -49,7 +49,7 @@ const numberOfTasks = computed(() => {
         </button>
         <button
           class="tasks-list__single-task-delite"
-          @click="deliteTask(task)"
+          @click="deleteTask(tasks, task, 'tasksList')"
         >
           x
         </button>
@@ -61,3 +61,4 @@ const numberOfTasks = computed(() => {
 <style></style>
 
 //style for component located in parent component AllTasks.vue
+@/composable/deleteTask

@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
+import { deleteTask } from "@/composable/deleteTask.ts";
+import { checkLocalStorage } from "@/composable/checkLocalStorage.ts";
 
 const props = defineProps<{
   doneTask: string;
@@ -11,16 +13,15 @@ const props = defineProps<{
 
 const doneTasks = ref<string[]>([]);
 
+checkLocalStorage("doneTasks", doneTasks.value);
+
 watch(
   () => props.doneTask,
   () => {
     doneTasks.value.push(props.doneTask);
+    localStorage.setItem("doneTasks", doneTasks.value);
   }
 );
-
-const deliteDoneTask = (donetask: string): void => {
-  doneTasks.value.splice(doneTasks.value.indexOf(donetask), 1);
-};
 
 const numberOfDoneTasks = computed(() => {
   return doneTasks.value ? doneTasks.value.length : 0;
@@ -37,7 +38,7 @@ const numberOfDoneTasks = computed(() => {
         <li class="tasks-list__single-task-item">{{ doneTask }}</li>
         <button
           class="tasks-list__single-task-delite"
-          @click="deliteDoneTask(doneTask)"
+          @click="deleteTask(doneTasks, doneTask, 'doneTasks')"
         >
           x
         </button>
