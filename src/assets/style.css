@@ -10,9 +10,9 @@
   --background-color: #1f1f1f;
   --text-color: #fff;
   --margin-padding: 1.2rem;
+  --title-size: 4.4rem;
   --text-size: 2.4rem;
   --text-style: Verdana, sans-serif;
-  --sign-style: cursive;
 }
 
 html {

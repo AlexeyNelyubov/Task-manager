@@ -24,7 +24,7 @@ setTimeout(() => {
 
 .index-main__title {
   margin-top: 10vh;
-  font: var(--text-size) var(--text-style);
+  font: var(--title-size) var(--text-style);
   color: var(--text-color);
 }
 
