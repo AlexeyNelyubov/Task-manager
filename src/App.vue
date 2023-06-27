@@ -1,7 +1,13 @@
 <script setup lang="ts"></script>
 
 <template>
-  <RouterView />
+  <main class="app-main">
+    <RouterView />
+  </main>
 </template>
 
-<style></style>
+<style>
+.app-main {
+  background-color: var(--background-color);
+}
+</style>
